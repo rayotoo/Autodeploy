@@ -60,7 +60,7 @@ jobs:
           keys: [backend-build]
       - run:
           name: back-end build
-          working_directory: ./backend
+          #working_directory: ./backend
           command: |
              # Your code here
             cd backend
