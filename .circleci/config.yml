@@ -1,4 +1,6 @@
 version: 2.1
+orbs: 
+  slack: circleci/slack@4.10.1
 
 # commands:
 #   destroy-environment:
@@ -49,6 +51,7 @@ jobs:
       - save_cache:
           paths: [frontend/node_modules]
           key: frontend-build
+      - slack/status
 
   build-backend:
     docker:
