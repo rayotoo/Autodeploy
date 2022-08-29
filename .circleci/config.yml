@@ -51,7 +51,7 @@ jobs:
       - save_cache:
           paths: [frontend/node_modules]
           key: frontend-build
-      - slack/status
+      - slack/status:
           branch_pattern: main
           event: fail
           template: basic_fail_1
