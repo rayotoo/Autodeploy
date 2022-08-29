@@ -41,7 +41,7 @@ jobs:
       - restore_cache:
           keys: [frontend-build]
       - run:
-          name: build front-end
+          name: Build front-end
           command: |
             # Your code here
             cd frontend
@@ -60,7 +60,7 @@ jobs:
       - restore_cache:
           keys: [backend-build]
       - run:
-          name: back-end build
+          name: Back-end build
           #working_directory: ./backend
           command: |
              # Your code here
