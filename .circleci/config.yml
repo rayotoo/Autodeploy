@@ -52,6 +52,9 @@ jobs:
           paths: [frontend/node_modules]
           key: frontend-build
       - slack/status
+          branch_pattern: main
+          event: fail
+          template: basic_fail_1
 
   build-backend:
     docker:
