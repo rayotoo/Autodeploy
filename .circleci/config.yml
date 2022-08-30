@@ -7,7 +7,7 @@ commands:
       # Add parameter here
       when:
         type: string
-      id:
+      workflow_id:
         type: string
 
 
