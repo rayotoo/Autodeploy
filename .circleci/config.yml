@@ -153,6 +153,7 @@ jobs:
           name: Ensure back-end infrastructure exists
           command: |
             pwd
+            ls
             aws cloudformation deploy \
               --template-file .circleci/files/backend.yml \
               --stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
