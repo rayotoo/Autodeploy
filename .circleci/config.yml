@@ -16,9 +16,9 @@ commands:
           when: on_fail
           command: |
             # Your code here
-            aws cloudformation delete-stack --stack-name udapeople-backend-<< parameters.id >>
-          environment:
-            TERM: xterm-256color
+            aws cloudformation delete-stack --stack-name udapeople-backend- 
+          #environment:
+          #  TERM: xterm-256color
           #when: << parameters.when >>
 
       - run:
@@ -26,9 +26,9 @@ commands:
           when: on_fail
           command: |
             aws s3 rm s3://udapeople-<< parameters.id >> --recursive
-            aws cloudformation delete-stack --stack-name udapeople-frontend-<< parameters.id >>
-          environment:
-            TERM: xterm-256color
+            aws cloudformation delete-stack --stack-name udapeople-frontend-
+          #environment:
+          #  TERM: xterm-256color
           #when: << parameters.when >>
 
   # revert-migrations:
