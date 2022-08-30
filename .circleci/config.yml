@@ -151,6 +151,7 @@ jobs:
       - run: yum install tar gzip -y
       - run:
           name: Ensure back-end infrastructure exists
+          working_directory: ./.circleci/ansible
           command: |
             aws cloudformation deploy \
               --template-file backend.yml \
