@@ -233,7 +233,7 @@ jobs:
             # Your code here
             cd backend
             npm i
-            npm audit fix --audit-level=critical --force
+            npm audit fix
             npm run migrations > migrations-result.txt
 
       - run:
