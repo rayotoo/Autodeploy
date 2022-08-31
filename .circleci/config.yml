@@ -240,7 +240,7 @@ jobs:
           name: Run migrations
           command: |
             cd backend
-            sudo npm install -g npm
+            sudo npm install -g npm@latest
             npm run migrations > migrations_dump.txt
             cat migrations_dump.txt
       - run:
