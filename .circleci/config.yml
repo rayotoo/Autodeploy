@@ -220,7 +220,7 @@ jobs:
   run-migrations:
     docker:
       # Docker image here that supports NodeJS
-      - image: 18120211/node-aws-ansible-22.04
+      - image: circleci/node:13.8.0
     steps:
       # Checkout code from git
       - checkout
@@ -232,8 +232,8 @@ jobs:
           command: |
             # Your code here
             cd backend
-            npm i
-            npm audit fix
+            apk add --update --no-cache nodejs npm aws-cli
+            sudo npm install -g npm
             npm run migrations > migrations-result.txt
 
       - run:
