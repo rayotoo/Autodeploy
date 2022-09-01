@@ -415,6 +415,7 @@ jobs:
     steps:
       # Checkout code from git
       - checkout
+
       - run:
           name: Backend smoke test.
           command: |
@@ -423,20 +424,37 @@ jobs:
             --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" \
             --output text)
             echo ${BACKEND_IP}
-            
             export BACKEND=$(echo $BACKEND_IP | grep -o '[^ ]*$')
-            
             echo $BACKEND
             export API_URL="http://${BACKEND}:3030"
-            echo "API_URL=${API_URL}"
-            echo "Sleeping for 1 minute"
-            sleep 60
-            if curl -v "${API_URL}/api/status" | grep "ok"
+
+            TRIES=60
+            FAILED=0
+            curl "${API_URL}/api/status" || FAILED=1
+            
+            while [ $FAILED -eq 1 ]
+            do
+              FAILED=0
+              echo "Trying again"
+              sleep 4
+              curl "${API_URL}/api/status" || FAILED=1
+              TRIES=$(( $TRIES - 1 ))
+              
+              if [ $TRIES -eq 0 ]
+              then
+                return 1
+              fi
+            done
+
+
+            echo "${API_URL}"
+            if curl "${API_URL}/api/status" | grep "ok"
             then
               return 0
             else
               return 1
-            fi 
+            fi
+
       - run:
           name: Frontend smoke test.
           command: |
