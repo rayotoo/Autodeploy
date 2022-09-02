@@ -409,9 +409,8 @@ jobs:
             echo "Sleeping for 1 minute"
 
             sleep 60
-            #if curl -v "${API_URL}/api/status" | grep "ok"
-            #if curl -v curl -v --noproxy localhost, "${API_URL}/api/status" | grep "ok"
-            if curl -v curl -v --noproxy localhost | grep "ok"
+            if curl -v "${API_URL}/api/status" | grep "ok"
+
 
             then
               return 0
