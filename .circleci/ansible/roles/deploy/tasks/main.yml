@@ -29,19 +29,30 @@
     production: yes
     state: present
 
-- name: "Copy artifact into Instance" 
-  become: true
+- name: Creates Directory
+  file:
+    path: /home/ubuntu/backend
+    state: directory 
+
+- name: Copy backend dist files web server
   copy:
-    src: ~/project/artifact.tar.gz
-    dest: /home/ubuntu/artifact.tar.gz
+    src: /root/project/artifact.tar.gz
+    dest: /home/ubuntu/backend/artifact.tar.gz 
 
+- name: Uncompress Backend
+  shell: |
+    cd /home/ubuntu/backend
+    tar xvzf artifact.tar.gz -C .
+    ls -la
 
-- name: "Start app"
+- name: Build
   become: true
   shell: |
-    cd /home/ubuntu
-    tar xzvf artifact.tar.gz
+    cd /home/ubuntu/backend
     npm install
-    npm run build
-    pm2 stop all
-    pm2 start npm -- start
+    npm run build 
+
+- name: Start PM2
+  shell: |
+    cd /home/ubuntu/backend
+    pm2 start npm --name backend -- start
