@@ -410,7 +410,8 @@ jobs:
 
             sleep 60
             #if curl -v "${API_URL}/api/status" | grep "ok"
-            if curl -v curl -v --noproxy localhost, "${API_URL}/api/status" | grep "ok"
+            #if curl -v curl -v --noproxy localhost, "${API_URL}/api/status" | grep "ok"
+            if curl -v curl -v --noproxy localhost | grep "ok"
 
             then
               return 0
