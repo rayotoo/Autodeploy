@@ -404,7 +404,6 @@ jobs:
              
             export BACKEND=$(echo $BACKEND_IP | grep -o '[^ ]*$')
             echo $BACKEND
-            echo $BACKEND
             export API_URL="http://${BACKEND}:3030"
             echo "API_URL=${API_URL}"
             echo "Sleeping for 1 minute"
@@ -434,12 +433,12 @@ jobs:
               return 1
             fi
       
-      - destroy-environment:
-          id: ${CIRCLE_WORKFLOW_ID:0:7}
-          when: on_fail
+      # - destroy-environment:
+      #     id: ${CIRCLE_WORKFLOW_ID:0:7}
+      #     when: on_fail
 
-      - revert-migrations:
-          id: ${CIRCLE_WORKFLOW_ID:0:7}  
+      # - revert-migrations:
+      #     id: ${CIRCLE_WORKFLOW_ID:0:7}  
 
 
 
