@@ -333,6 +333,7 @@ jobs:
       - add_ssh_keys:
          fingerprints:
             - "3e:5c:fd:bc:cc:61:b5:b1:59:a0:50:aa:6e:fd:a3:70"
+
       # attach workspace
       - attach_workspace:
           at: ~/
@@ -365,6 +366,7 @@ jobs:
             cd ..
             pwd
             ls -al
+            
             # Zip the directory
             tar -C backend -czvf artifact.tar.gz .
             cd .circleci/ansible
@@ -410,7 +412,6 @@ jobs:
 
             sleep 60
             if curl -v "${API_URL}/api/status" | grep "ok"
-
 
             then
               return 0
