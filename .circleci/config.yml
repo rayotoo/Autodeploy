@@ -61,18 +61,6 @@ commands:
             unzip awscliv2.zip
             sudo ./aws/install
             
-  install_nodejs:
-    description: Install Node.js 13
-    steps:
-      - run:
-          name: Install Node.js 13
-          command: |
-            # Install Node.js LTS version as our base Node.js version
-            curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
-            sudo apt install -y nodejs
-            # Use n version manager to use Node.js v13.8.0
-            sudo npm install --global n
-            sudo n 13.8.0
             
 jobs:
   build-frontend:
@@ -266,15 +254,9 @@ jobs:
           name: Run migrations
           command: |
             cd backend
-
-            # Install Node.js LTS version as our base Node.js version
-            curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
-            sudo apt install -y nodejs
-            # Use n version manager to use Node.js v13.8.0
             sudo npm install -g npm
-            sudo n 13.8.0 
             npm run migrations > migrations_dump.txt
-            cat migrations_dump.txt  
+            cat migrations_dump.txt
 
       - run:
           name: Send migration results to kvdb.io
@@ -284,9 +266,9 @@ jobs:
                 curl --insecure https://kvdb.io/8C9S91LZLGHPc5LXfWiQew/migration_${CIRCLE_WORKFLOW_ID:0:7} -d '1'
             fi
      # Here's where you will add some code to rollback on failure      
-      - destroy-environment:
-            id: ${CIRCLE_WORKFLOW_ID:0:7} 
-            when: on_fail   
+      # - destroy-environment:
+      #       id: ${CIRCLE_WORKFLOW_ID:0:7} 
+      #       when: on_fail   
 
   deploy-frontend:
     docker:
