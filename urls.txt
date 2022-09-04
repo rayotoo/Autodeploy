@@ -1,1 +1,2 @@
 [URL01] https://github.com/rayotoo/Autodeploy
+[URL02] http://udapeople-eaed1c7.s3-website-us-east-1.amazonaws.com/
