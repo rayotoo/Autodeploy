@@ -445,6 +445,7 @@ jobs:
       # Docker image here that supports AWS CLI
     steps:
       # Checkout code from git
+      - checkout
       - run:
           name: Install dependencies
           command: |
